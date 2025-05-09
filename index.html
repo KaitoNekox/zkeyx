@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zkeyx</title>
+    <link rel="icon" href="https://i.postimg.cc/dtB8wz94/file-00000000e15061f8875480ad4f439c36.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+        }
+
+        .btn-secondary {
+            background-color: #333;
+        }
+
+        .btn-tertiary {
+            background-color: #ff3333;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-container {
+            display: none;
+        }
+
+        .task {
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #333;
+            color: #666;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: not-allowed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .unlock-btn.active {
+            background-color: #fff;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .success-container {
+            display: none;
+            text-align: center;
+        }
+
+        .checkmark {
+            font-size: 80px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .key-display {
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 5px solid #4CAF50;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="logo">Zkeyx</div>
+        
+        <div class="btn-container" id="mainMenu">
+            <button class="btn btn-primary" id="continueBtn">Continuar</button>
+            <a href="https://youtube.com" class="btn btn-secondary">YouTube</a>
+            <a href="https://example.com/comprar" class="btn btn-tertiary">Comprar</a>
+        </div>
+        
+        <div class="auth-container" id="authContainer">
+            <h2>Complete las siguientes tareas:</h2>
+            
+            <div class="task">
+                <div class="task-info">
+                    <input type="checkbox" class="task-checkbox" id="task1">
+                    <label for="task1">Ver video de 3 minutos</label>
+                </div>
+                <a href="https://youtube.com" target="_blank">Ver</a>
+            </div>
+            
+            <div class="task">
+                <div class="task-info">
+                    <input type="checkbox" class="task-checkbox" id="task2">
+                    <label for="task2">Completar encuesta</label>
+                </div>
+                <a href="https://example.com/encuesta" target="_blank">Ir</a>
+            </div>
+            
+            <div class="task">
+                <div class="task-info">
+                    <input type="checkbox" class="task-checkbox" id="task3">
+                    <label for="task3">Seguirnos en Telegram</label>
+                </div>
+                <a href="https://t.me/microbytte" target="_blank">Unirse</a>
+            </div>
+            
+            <div class="task">
+                <div class="task-info">
+                    <input type="checkbox" class="task-checkbox" id="task4">
+                    <label for="task4">Suscribirse al canal</label>
+                </div>
+                <a href="https://youtube.com" target="_blank">Suscribirse</a>
+            </div>
+            
+            <button class="unlock-btn" id="unlockBtn">
+                <span id="lockIcon">🔒</span> Unlock content
+            </button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Generando clave...</p>
+        </div>
+        
+        <div class="success-container" id="successContainer">
+            <div class="checkmark">✓</div>
+            <h2>Completed successfully</h2>
+            <div class="key-display" id="keyDisplay">FREE_XXXX_XXX</div>
+            <button class="copy-btn" id="copyBtn">Copiar clave</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const mainMenu = document.getElementById('mainMenu');
+            const continueBtn = document.getElementById('continueBtn');
+            const authContainer = document.getElementById('authContainer');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const lockIcon = document.getElementById('lockIcon');
+            const loading = document.getElementById('loading');
+            const successContainer = document.getElementById('successContainer');
+            const keyDisplay = document.getElementById('keyDisplay');
+            const copyBtn = document.getElementById('copyBtn');
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            
+            function createParticles() {
+                const particleCount = 30;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.width = `${Math.random() * 5 + 2}px`;
+                    particle.style.height = particle.style.width;
+                    particle.style.opacity = Math.random() * 0.5 + 0.1;
+                    
+                    const duration = Math.random() * 20 + 10;
+                    particle.style.animation = `float ${duration}s linear infinite`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes float {
+                        0% {
+                            transform: translate(0, 0);
+                        }
+                        50% {
+                            transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+                        }
+                        100% {
+                            transform: translate(0, 0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            function generateRandomKey() {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                const nums = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                
+                let part1 = '';
+                for (let i = 0; i < 4; i++) {
+                    part1 += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                
+                let part2 = '';
+                for (let i = 0; i < 3; i++) {
+                    part2 += nums.charAt(Math.floor(Math.random() * nums.length));
+                }
+                
+                return `FREE_${part1}_${part2}`;
+            }
+            
+            function checkTasks() {
+                let allCompleted = true;
+                checkboxes.forEach(checkbox => {
+                    if (!checkbox.checked) {
+                        allCompleted = false;
+                    }
+                });
+                
+                if (allCompleted) {
+                    unlockBtn.classList.add('active');
+                    lockIcon.textContent = '🔓';
+                } else {
+                    unlockBtn.classList.remove('active');
+                    lockIcon.textContent = '🔒';
+                }
+            }
+            
+            continueBtn.addEventListener('click', function() {
+                mainMenu.style.display = 'none';
+                authContainer.style.display = 'block';
+            });
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', checkTasks);
+            });
+            
+            unlockBtn.addEventListener('click', function() {
+                if (unlockBtn.classList.contains('active')) {
+                    authContainer.style.display = 'none';
+                    loading.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        loading.style.display = 'none';
+                        successContainer.style.display = 'block';
+                        
+                        const key = generateRandomKey();
+                        keyDisplay.textContent = key;
+                    }, 5000);
+                }
+            });
+            
+            copyBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(keyDisplay.textContent)
+                    .then(() => {
+                        copyBtn.textContent = 'Copiado!';
+                        setTimeout(() => {
+                            copyBtn.textContent = 'Copiar clave';
+                        }, 2000);
+                    });
+            });
+            
+            createParticles();
+        });
+    </script>
+</body>
+                      </html>
