@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paquete de Edición</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .floating-image {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.8;
+        }
+        
+        .floating-image:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .floating-image:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+            width: 90px;
+            height: 90px;
+        }
+        
+        .floating-image:nth-child(3) {
+            top: 30%;
+            left: 70%;
+            animation-delay: 4s;
+            width: 80px;
+            height: 80px;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .file-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #4a90e2;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        .file-size {
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #aaa;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #4a90e2, #2d5985);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.6);
+        }
+        
+        .download-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .download-btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .credits {
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+        }
+        
+        .credits a {
+            color: #4a90e2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .credits a:hover {
+            color: #6ba8ff;
+            text-decoration: underline;
+        }
+        
+        .whatsapp-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #25D366;
+            background-color: #000;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 100;
+            animation: wiggle 2.5s infinite;
+        }
+        
+        .whatsapp-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes wiggle {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            5% {
+                transform: rotate(-10deg);
+            }
+            10% {
+                transform: rotate(10deg);
+            }
+            15% {
+                transform: rotate(-10deg);
+            }
+            20% {
+                transform: rotate(0deg);
+            }
+        }
+        
+        /* Prevent text selection */
+        .no-select {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating images -->
+    <img src="https://ugc.production.linktr.ee/f97c6fbe-e49e-4c7c-b95c-dee5c5885bec_HD.png?io=true&size=avatar-v3_0" class="floating-image" alt="Floating image 1">
+    <img src="https://ugc.production.linktr.ee/f97c6fbe-e49e-4c7c-b95c-dee5c5885bec_HD.png?io=true&size=avatar-v3_0" class="floating-image" alt="Floating image 2">
+    <img src="https://ugc.production.linktr.ee/f97c6fbe-e49e-4c7c-b95c-dee5c5885bec_HD.png?io=true&size=avatar-v3_0" class="floating-image" alt="Floating image 3">
+    
+    <!-- WhatsApp icon -->
+    <a href="https://whatsapp.com/channel/0029VarSMCuL2AU2EUONKu08" target="_blank" class="whatsapp-icon no-select">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Main content -->
+    <div class="container no-select">
+        <i class="fas fa-file-archive file-icon"></i>
+        <p class="file-size">Paquete De Edición (471.90MB)</p>
+        <button class="download-btn" onclick="window.location.href='https://dl.dropboxusercontent.com/scl/fi/9odrhwj0z9kqf5itkas3n/Paquete_de_edici-n.zip?rlkey=ddmjsyd09j5m6ibuy26vmfgbq&st=a1hvmqjt&dl=1'">Descargar</button>
+        <p class="credits">Los archivos están creados por <a href="https://t.me/satriyaid" target="_blank">Satriyaid</a> créditos a ese canal.</p>
+    </div>
+    
+    <script>
+        // Prevent right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Prevent keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Add more floating images dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            for (let i = 0; i < 2; i++) {
+                const img = document.createElement('img');
+                img.src = 'https://ugc.production.linktr.ee/f97c6fbe-e49e-4c7c-b95c-dee5c5885bec_HD.png?io=true&size=avatar-v3_0';
+                img.className = 'floating-image';
+                img.style.top = Math.random() * 80 + 10 + '%';
+                img.style.left = Math.random() * 80 + 10 + '%';
+                img.style.width = Math.random() * 50 + 70 + 'px';
+                img.style.height = img.style.width;
+                img.style.animationDuration = Math.random() * 10 + 10 + 's';
+                img.style.animationDelay = Math.random() * 5 + 's';
+                body.appendChild(img);
+            }
+        });
+    </script>
+</body>
+  </html>
